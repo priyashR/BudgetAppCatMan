@@ -11,14 +11,13 @@ import com.gmail.ramawthar.priyash.repositories.CategoriesRepository;
 import com.gmail.ramawthar.priyash.models.Categories;
 
 @RestController
-@RequestMapping("/categories")
 public class CategoriesController {
 	@Autowired
 	private CategoriesRepository repository;
 	
 
-	  @RequestMapping(value = "/", method = RequestMethod.GET)
-	  public List<Categories> getAllPets() {
+	  @RequestMapping(value = "/categories", method = RequestMethod.GET)
+	  public List<Categories> getAllCategories() {
 	    return repository.findAll();
 	  }
 /*
