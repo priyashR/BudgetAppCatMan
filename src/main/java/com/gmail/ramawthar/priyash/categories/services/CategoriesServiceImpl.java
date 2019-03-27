@@ -10,7 +10,7 @@ import com.gmail.ramawthar.priyash.categories.model.Categories;
 
 @Service
 public class CategoriesServiceImpl implements CategoriesService {
-
+ 
 	@Autowired
 	private CategoriesRepository repository;
 	
