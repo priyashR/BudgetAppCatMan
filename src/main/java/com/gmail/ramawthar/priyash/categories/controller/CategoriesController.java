@@ -10,14 +10,22 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gmail.ramawthar.priyash.categories.dao.CategoriesRepository;
 import com.gmail.ramawthar.priyash.categories.model.Categories;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 public class CategoriesController {
+
+    private final Logger logger = LoggerFactory.getLogger(CategoriesController.class);
+    
 	@Autowired
 	private CategoriesRepository repository;
 	
 
 	  @RequestMapping(value = "/categories", method = RequestMethod.GET)
 	  public List<Categories> getAllCategories() {
+		logger.info("------ info level - Get all the categories------");
+		logger.warn("------ warn level - Get all the categories------");
 	    return repository.findAll();
 	  }
 /*
