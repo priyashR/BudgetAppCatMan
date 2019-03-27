@@ -21,7 +21,7 @@ public class CategoriesController {
 
     private final Logger logger = LoggerFactory.getLogger(CategoriesController.class);
     
-/*   works! 
+/*   works without service impl! 
 	@Autowired
 	private CategoriesRepository repository;
 	
