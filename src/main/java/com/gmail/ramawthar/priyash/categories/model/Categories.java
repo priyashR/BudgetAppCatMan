@@ -1,4 +1,4 @@
-package com.gmail.ramawthar.priyash.models;
+package com.gmail.ramawthar.priyash.categories.model;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;

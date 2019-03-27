@@ -1,8 +1,9 @@
-package com.gmail.ramawthar.priyash.repositories;
+package com.gmail.ramawthar.priyash.categories.dao;
 
-import com.gmail.ramawthar.priyash.models.Categories;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.gmail.ramawthar.priyash.categories.model.Categories;
 
 
 public interface CategoriesRepository extends MongoRepository<Categories, String> {

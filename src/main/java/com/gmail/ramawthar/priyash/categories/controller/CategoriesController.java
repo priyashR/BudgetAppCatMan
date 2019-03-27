@@ -1,4 +1,4 @@
-package com.gmail.ramawthar.priyash.controllers;
+package com.gmail.ramawthar.priyash.categories.controller;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gmail.ramawthar.priyash.repositories.CategoriesRepository;
-import com.gmail.ramawthar.priyash.models.Categories;
+import com.gmail.ramawthar.priyash.categories.dao.CategoriesRepository;
+import com.gmail.ramawthar.priyash.categories.model.Categories;
 
 @RestController
 public class CategoriesController {
