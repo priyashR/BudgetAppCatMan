@@ -1,9 +1,12 @@
 package com.gmail.ramawthar.priyash.categories.services;
 
+import java.net.URI;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gmail.ramawthar.priyash.categories.dao.CategoriesRepository;
 import com.gmail.ramawthar.priyash.categories.model.Categories;
@@ -19,4 +22,21 @@ public class CategoriesServiceImpl implements CategoriesService {
 		return repository.findAll();
 	}
 
+	@Override
+	public URI createCategory(Categories categories){
+		categories.set_id(ObjectId.get());
+		Categories newCategory = repository.save(categories);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newCategory.get_id()).toUri();
+	    return location;
+	}
+	
+	@Override
+	public void removeCategory(ObjectId id){
+		repository.delete(repository.findBy_id(id));
+	}
+
+	@Override
+	public Categories getCategory(String category){
+		return repository.findBycategory(category);
+	}
 }
