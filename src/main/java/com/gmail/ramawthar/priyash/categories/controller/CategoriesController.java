@@ -79,7 +79,12 @@ public class CategoriesController {
 		//logger.warn("------ warn level - Get all the categories------");
 	    return new ResponseEntity<>(categoriesService.getAllUncategorised(), HttpStatus.OK);
 	  } 
-    
+	  
+	  @RequestMapping(value = "/allocateParent", method = RequestMethod.PUT)
+	  public ResponseEntity<Object> allocateParent(@Valid @RequestBody Categories categories) {
+			logger.info("Controller call to allocate a parent to an uncategorised category");
+	    return new ResponseEntity<>(categoriesService.updateCatParent(categories), HttpStatus.OK);
+	  } 
 /*
 	  @RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	  public Pets getPetById(@PathVariable("id") ObjectId id) {

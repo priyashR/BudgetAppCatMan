@@ -70,4 +70,21 @@ public class CategoriesServiceImpl implements CategoriesService {
 	public String getPath(String category){
 		return null;
 	}
+
+	@Override
+	public String updateCatParent(Categories categories){
+		Categories cat = repository.findBycategory(categories.category);
+		if (cat == null){
+			return "Category not found - no records updated";
+		}
+		if (!((cat.parent.equals("expenseUNCAT"))||(cat.parent.equals("incomeUNCAT")))){
+			return "Cannot update this parent, must be uncategorised - no records updated";
+		}
+		if(repository.findBycategory(categories.parent) == null){
+			return "Parent category not found - no records updated";
+		}
+		cat.parent = categories.parent;
+		repository.save(cat);
+		return "Success!";
+	}
 }
