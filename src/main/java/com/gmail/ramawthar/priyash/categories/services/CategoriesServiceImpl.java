@@ -1,6 +1,7 @@
 package com.gmail.ramawthar.priyash.categories.services;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.types.ObjectId;
@@ -59,7 +60,11 @@ public class CategoriesServiceImpl implements CategoriesService {
 	}
 	@Override
 	public List<Categories> getAllUncategorised(){
-		return null;
+		List<Categories> unCatExp = repository.findByparent("expenseUNCAT");
+		List<Categories> unCatInc = repository.findByparent("incomeUNCAT");
+		List<Categories> unCatFull = new ArrayList<Categories>(unCatExp);
+		unCatFull.addAll(unCatInc);
+		return unCatFull;
 	}
 	@Override
 	public String getPath(String category){

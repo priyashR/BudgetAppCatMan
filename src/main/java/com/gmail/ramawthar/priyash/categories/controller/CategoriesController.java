@@ -41,8 +41,8 @@ public class CategoriesController {
 	  @RequestMapping(value = "/newCategory", method = RequestMethod.POST)
 	  public ResponseEntity<Object> createCategory(@Valid @RequestBody Categories categories) {
 			logger.info("Controller call to createCategory");
-			categories.parent = categories.parent.toLowerCase();
-			categories.category = categories.category.toLowerCase();
+			categories.parent = categories.parent;
+			categories.category = categories.category;
 	    return ResponseEntity.created(categoriesService.createCategory(categories)).build();
 	  }
 	  
@@ -55,14 +55,14 @@ public class CategoriesController {
 	  @RequestMapping(value = "/category/{category}", method = RequestMethod.GET)
 	  public ResponseEntity<Object> getCategory(@PathVariable("category") String category) {
 			logger.info("Controller call to getCategory");
-		  return new ResponseEntity<>(categoriesService.getCategory(category.toLowerCase()), HttpStatus.OK);
+		  return new ResponseEntity<>(categoriesService.getCategory(category), HttpStatus.OK);
 	  }	  
 		
 	  @RequestMapping(value = "/siblings/{category}", method = RequestMethod.GET)
 	  public ResponseEntity<Object> getAllSiblings(@PathVariable("category") String category) {
 		logger.info("Controller call to getAllSiblings");
 		//logger.warn("------ warn level - Get all the categories------");
-	    return new ResponseEntity<>(categoriesService.getAllSiblings(category.toLowerCase()), HttpStatus.OK);
+	    return new ResponseEntity<>(categoriesService.getAllSiblings(category), HttpStatus.OK);
 	  } 
 	  
 
@@ -70,7 +70,14 @@ public class CategoriesController {
 	  public ResponseEntity<Object> getAllchildren(@PathVariable("parent") String parent) {
 		logger.info("Controller call to getAllchildren");
 		//logger.warn("------ warn level - Get all the categories------");
-	    return new ResponseEntity<>(categoriesService.getAllChildren(parent.toLowerCase()), HttpStatus.OK);
+	    return new ResponseEntity<>(categoriesService.getAllChildren(parent), HttpStatus.OK);
+	  } 
+	  
+	  @RequestMapping(value = "/uncategorized", method = RequestMethod.GET)
+	  public ResponseEntity<Object> getAllUncategorized() {
+		logger.info("Controller call to getAllUncategorized");
+		//logger.warn("------ warn level - Get all the categories------");
+	    return new ResponseEntity<>(categoriesService.getAllUncategorised(), HttpStatus.OK);
 	  } 
     
 /*

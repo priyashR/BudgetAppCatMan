@@ -13,9 +13,9 @@ public interface CategoriesService {
 	public Categories getCategory(String category);
 	public List<Categories> getAllSiblings(String category);
 	public List<Categories> getAllChildren(String parent);
+	public List<Categories> getAllUncategorised();
 	
 	//to do
-	public List<Categories> getAllUncategorised();
 	public String getPath(String category);
 	public Categories allocateParent(String category);
 	
