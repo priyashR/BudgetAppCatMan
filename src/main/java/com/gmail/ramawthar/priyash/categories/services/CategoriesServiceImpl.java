@@ -39,4 +39,30 @@ public class CategoriesServiceImpl implements CategoriesService {
 	public Categories getCategory(String category){
 		return repository.findBycategory(category);
 	}
+	
+
+	@Override
+	public Categories allocateParent(String category){
+		return null;
+	}
+	
+	//to do
+	@Override
+	public List<Categories> getAllSiblings(String category){
+		Categories categories = repository.findBycategory(category);
+		return repository.findByparent(categories.parent);
+	}
+	
+	@Override
+	public List<Categories> getAllChildren(String parent){
+		return repository.findByparent(parent);
+	}
+	@Override
+	public List<Categories> getAllUncategorised(){
+		return null;
+	}
+	@Override
+	public String getPath(String category){
+		return null;
+	}
 }

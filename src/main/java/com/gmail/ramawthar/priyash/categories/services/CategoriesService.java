@@ -11,4 +11,12 @@ public interface CategoriesService {
 	public URI createCategory(Categories categories);
 	public void removeCategory(ObjectId id);
 	public Categories getCategory(String category);
+	public List<Categories> getAllSiblings(String category);
+	public List<Categories> getAllChildren(String parent);
+	
+	//to do
+	public List<Categories> getAllUncategorised();
+	public String getPath(String category);
+	public Categories allocateParent(String category);
+	
 }
