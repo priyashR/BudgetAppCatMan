@@ -83,8 +83,14 @@ public class CategoriesController {
 	  @RequestMapping(value = "/allocateParent", method = RequestMethod.PUT)
 	  public ResponseEntity<Object> allocateParent(@Valid @RequestBody Categories categories) {
 			logger.info("Controller call to allocate a parent to an uncategorised category");
-	    return new ResponseEntity<>(categoriesService.updateCatParent(categories), HttpStatus.OK);
+	    return new ResponseEntity<>(categoriesService.allocateParent(categories), HttpStatus.OK);
 	  } 
+	  
+	  @RequestMapping(value = "/fetchPath", method = RequestMethod.POST)
+	  public ResponseEntity<Object> fetchPath(@Valid @RequestBody FetchPathInput input) {
+			logger.info("Controller call to fetchPath");
+	    return new ResponseEntity<>(categoriesService.getPath(input.getCategory(), input.getTranType()), HttpStatus.OK);
+	  }
 /*
 	  @RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	  public Pets getPetById(@PathVariable("id") ObjectId id) {

@@ -42,10 +42,7 @@ public class CategoriesServiceImpl implements CategoriesService {
 	}
 	
 
-	@Override
-	public Categories allocateParent(String category){
-		return null;
-	}
+
 	
 	//to do
 	@Override
@@ -67,12 +64,42 @@ public class CategoriesServiceImpl implements CategoriesService {
 		return unCatFull;
 	}
 	@Override
-	public String getPath(String category){
-		return null;
+	public String getPath(String category, String tranType){
+		//System.out.println("getPath 1");
+		if ((category == null)||(tranType == null)){
+			return "Both parameters are required!";
+		}
+		//System.out.println("getPath 2");
+		Categories cat = repository.findBycategory(category);
+		if (cat == null){
+			Categories categories = new Categories(); 
+			categories.setCategory(category);
+			categories.setDescription("Transaction");
+			String parent = "expenseUNCAT";
+			if (tranType.equalsIgnoreCase("I"))
+				parent = "incomeUNCAT";
+			categories.setParent(parent);
+			categories.set_id(ObjectId.get());
+			Categories newCategory = repository.save(categories);
+			cat = newCategory;
+		}
+		//System.out.println("getPath 3");
+		
+		String parentLoop = cat.parent;
+		String path = parentLoop+"/"+cat.category;
+		//System.out.println("getPath 3a "+ parentLoop + " " + path);
+		while (!(parentLoop.equalsIgnoreCase("none"))){
+			Categories catLoop = repository.findBycategory(parentLoop);
+			path = catLoop.parent+"/"+path;
+			parentLoop = catLoop.parent;
+		}
+		//System.out.println("getPath 4");
+		
+		return path;
 	}
 
 	@Override
-	public String updateCatParent(Categories categories){
+	public String allocateParent(Categories categories){
 		Categories cat = repository.findBycategory(categories.category);
 		if (cat == null){
 			return "Category not found - no records updated";
