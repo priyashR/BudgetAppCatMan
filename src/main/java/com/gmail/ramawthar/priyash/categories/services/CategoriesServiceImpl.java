@@ -1,5 +1,9 @@
 package com.gmail.ramawthar.priyash.categories.services;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +11,7 @@ import java.util.List;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gmail.ramawthar.priyash.categories.dao.CategoriesRepository;
@@ -114,4 +119,33 @@ public class CategoriesServiceImpl implements CategoriesService {
 		repository.save(cat);
 		return "Success!";
 	}
+	
+    public String processCSVFile(MultipartFile file){
+    	String status = "Empty file!";
+    	if (!(file.isEmpty())){
+    		status = "File is being processed";
+	    	BufferedReader br;
+	    	List<String> result = new ArrayList<>();
+	    	try {
+	
+	    	     String line;
+	    	     InputStream is = file.getInputStream();
+	    	     br = new BufferedReader(new InputStreamReader(is));
+	    	     while ((line = br.readLine()) != null) {
+	    	          result.add(line);
+	    	          System.out.println(line);
+	    	          
+	    	          /*TO DO: process the line here*/
+	    	     }
+	  
+	    	  } catch (IOException e) {
+	    	    System.err.println(e.getMessage());       
+	    	  }
+	    	
+	    	
+	    	status = "File processed";
+    	}
+    	
+    	return status;
+    }
 }
