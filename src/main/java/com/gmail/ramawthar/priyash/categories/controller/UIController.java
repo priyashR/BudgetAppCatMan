@@ -77,14 +77,14 @@ public class UIController {
  	private void setUpDate(Model model){
  		List<Categories> uncat = categoriesService.getAllUncategorised();
  		for (Categories cat : uncat){
- 			cat.setParent(categoriesService.getPath(cat.getCategory(),"X"));
+ 			cat.setParent(cat.getParent()+" : "+categoriesService.getPath(cat.getCategory(),"X"));
  		}
  		model.addAttribute("unCatCategories", uncat);
  		
 
  		List<Categories> categories = categoriesService.getAllCategories();
  		for (Categories cat : categories){
- 			cat.setParent(categoriesService.getPath(cat.getCategory(),"X"));
+ 			cat.setParent(cat.getParent()+" : "+categoriesService.getPath(cat.getCategory(),"X"));
  		}
  		model.addAttribute("categories", categories);
  		
