@@ -21,6 +21,24 @@
 			</li>
 		</ul>
 	</div>
+	
+	<table>
+    <thead>
+        <tr>
+            <th> Category </th>
+            <th> Description </th>
+            <th> Parent </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr th:each="category : ${unCatCategories}">
+            <td><span th:text="${category.category}"> Title </span></td>
+            <td><span th:text="${category.description}"> Author </span></td>
+            <td><span th:text="${category.parent}"> Author </span></td>
+        </tr>
+    </tbody>
+</table>
 
 </body>
 </html>
