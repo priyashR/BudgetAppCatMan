@@ -22,17 +22,48 @@
 		</ul>
 	</div>
 	
-	<table>
+	
+	<h2>Uncategorised references</h2>
+	<table style="width:100%">
     <thead>
+    <style>
+	table, th, td {
+	  border: 1px solid black;
+	}
+	</style>
         <tr>
             <th> Category </th>
             <th> Description </th>
-            <th> Parent </th>
+            <th> Family </th>
         </tr>
     </thead>
     <tbody>
 
         <tr th:each="category : ${unCatCategories}">
+            <td><span th:text="${category.category}"> Title </span></td>
+            <td><span th:text="${category.description}"> Author </span></td>
+            <td><span th:text="${category.parent}"> Author </span></td>
+        </tr>
+    </tbody>
+</table>
+
+	<h2>Categories</h2>
+	<table style="width:100%">
+    <thead>
+    <style>
+	table, th, td {
+	  border: 1px solid black;
+	}
+	</style>
+        <tr>
+            <th> Category </th>
+            <th> Description </th>
+            <th> Family </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr th:each="category : ${categories}">
             <td><span th:text="${category.category}"> Title </span></td>
             <td><span th:text="${category.description}"> Author </span></td>
             <td><span th:text="${category.parent}"> Author </span></td>
