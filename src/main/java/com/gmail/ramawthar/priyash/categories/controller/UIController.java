@@ -39,7 +39,7 @@ public class UIController {
 			//logger.info("Controller call to fetchPath");
 	    return new ResponseEntity<>(HttpStatus.OK);
 	  }
- 	  
+ 	   
  	 @GetMapping("/")
  	public String index(Model model) {
  		model.addAttribute("unCatCategories", categoriesService.getAllUncategorised());
