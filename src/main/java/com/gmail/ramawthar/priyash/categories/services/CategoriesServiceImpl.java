@@ -120,10 +120,14 @@ public class CategoriesServiceImpl implements CategoriesService {
 		return "Success!";
 	}
 	
-    public String processCSVFile(MultipartFile file){
+    public String processCSVFile(MultipartFile file, String refresh){
     	String status = "Empty file!";
     	if (!(file.isEmpty())){
     		status = "File is being processed";
+    		
+    		if (refresh.equalsIgnoreCase("Y")){
+    			System.out.println("Delete all records here");
+    		}
 	    	BufferedReader br;
 	    	List<String> result = new ArrayList<>();
 	    	try {

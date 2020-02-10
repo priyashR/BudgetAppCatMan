@@ -5,6 +5,7 @@
 		<h2 th:text="${message}"/>
 	</div>
 
+	<h2>Upload batch categories</h2>
 	<div>
 		<form method="POST" enctype="multipart/form-data" action="/processCSVFile">
 			<table>
@@ -13,7 +14,29 @@
 			</table>
 		</form>
 	</div>
-
+	
+	<h2>Upload batch AND delete old data categories</h2>
+	<div>
+		<form method="POST" enctype="multipart/form-data" action="/refreshAndProcessCSVFile">
+			<table>
+				<tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
+				<tr><td></td><td><input type="submit" value="Upload and Refresh" /></td></tr>
+			</table>
+		</form>
+	</div>	
+	
+	<h2>Allocate a parent</h2>
+	<div>
+		<form method="POST" enctype="multipart/form-data" action="/allocateParent">
+			<table>
+				<tr><td>Category</td><td><input type="text" name="category" /></td></tr>
+				<tr><td>Description</td><td><input type="text" name="description" /></td></tr>
+				<tr><td>Parent</td><td><input type="text" name="parent" /></td></tr>
+				<tr><td></td><td><input type="submit" value="Allocate" /></td></tr>
+			</table>
+		</form>
+	</div>
+	
 	<div>
 		<ul>
 			<li th:each="file : ${files}">

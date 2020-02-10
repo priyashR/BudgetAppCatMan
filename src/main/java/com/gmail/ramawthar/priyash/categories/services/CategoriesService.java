@@ -18,7 +18,7 @@ public interface CategoriesService {
 	public List<Categories> getAllUncategorised();
 	public String allocateParent(Categories categories);
 
-    String processCSVFile(MultipartFile file);
+    String processCSVFile(MultipartFile file, String refresh);
     
 	//to do
 	public String getPath(String category, String tranType);
