@@ -128,6 +128,10 @@ public class CategoriesServiceImpl implements CategoriesService {
     		
     		if (refresh.equalsIgnoreCase("Y")){
     			System.out.println("Delete all records here");
+    			List<Categories> allCat = getAllCategories();
+    			for (Categories cat : allCat){
+    				removeCategory(new ObjectId(cat.get_id()));
+    			}
     		}
 	    	BufferedReader br;
 	    	
@@ -150,6 +154,7 @@ public class CategoriesServiceImpl implements CategoriesService {
 		    	    		else if (count==2){category.setDescription(st.nextToken());}//description
 		    	    		else if (count==3){category.setParent(st.nextToken());}//parent
 		    	        }
+		    	    	createCategory(category);
 	    	     }
 	  
 	    	  } catch (IOException e) {
