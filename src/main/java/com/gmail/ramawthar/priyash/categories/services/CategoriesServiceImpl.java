@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,17 +130,26 @@ public class CategoriesServiceImpl implements CategoriesService {
     			System.out.println("Delete all records here");
     		}
 	    	BufferedReader br;
-	    	List<String> result = new ArrayList<>();
+	    	
 	    	try {
 	
 	    	     String line;
+	    	     Categories category;
 	    	     InputStream is = file.getInputStream();
 	    	     br = new BufferedReader(new InputStreamReader(is));
 	    	     while ((line = br.readLine()) != null) {
-	    	          result.add(line);
-	    	          System.out.println(line);
 	    	          
-	    	          /*TO DO: process the line here*/
+	    	          System.out.println(line);
+	    	          category = new Categories();
+		    	  		StringTokenizer st = new StringTokenizer(line,",");  
+		    			int count = 0;
+		    	    	while (st.hasMoreTokens()) {  
+		    	    		count++;
+	
+		    	    		if (count==1){category.setCategory(st.nextToken());}//category keyword
+		    	    		else if (count==2){category.setDescription(st.nextToken());}//description
+		    	    		else if (count==3){category.setParent(st.nextToken());}//parent
+		    	        }
 	    	     }
 	  
 	    	  } catch (IOException e) {

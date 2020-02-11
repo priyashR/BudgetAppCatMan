@@ -57,12 +57,17 @@ public class UIController {
  	  } 
  	  
  	  @RequestMapping(value = "/allocateParent", method = RequestMethod.POST) 
-	  public String allocateParent(@RequestParam("category") String file,
+	  public String allocateParent(@RequestParam("category") String category,
 			  									   @RequestParam("description") String description,
 			  									   @RequestParam("parent") String parent,
 				RedirectAttributes redirectAttributes,
 				Model model) {
 		  System.out.println("allocating parent "+parent);
+		  Categories categories = new Categories();
+		  categories.setCategory(category);
+		  categories.setDescription(description);
+		  categories.setParent(parent);
+		  categoriesService.allocateParent(categories);
 		  redirectAttributes.addFlashAttribute("done!");
 			//logger.info("Controller call to fetchPath");
 	 		setUpDate(model);
