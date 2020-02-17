@@ -22,5 +22,6 @@ public interface CategoriesService {
     
 	//to do
 	public String getPath(String category, String tranType);
+	public String getPathUI(String category, String tranType);
 	
 }

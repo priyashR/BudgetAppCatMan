@@ -1,5 +1,6 @@
 package com.gmail.ramawthar.priyash.categories.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,18 +82,32 @@ public class UIController {
  	}
  	private void setUpDate(Model model){
  		List<Categories> uncat = categoriesService.getAllUncategorised();
+ 		List<Categories> uncatUI = new ArrayList<>();
+ 		;
  		for (Categories cat : uncat){
+ 			uncatUI.add(cat);
  			//cat.setParent(cat.getParent()+" : "+categoriesService.getPath(cat.getCategory(),"X"));
  		}
- 		model.addAttribute("unCatCategories", uncat);
+ 		for (Categories cat : uncatUI){
+ 			cat.setParent(cat.getParent()+" : "+categoriesService.getPathUI(cat.getCategory(),"X"));
+ 		}
+ 		//model.addAttribute("unCatCategories", uncat);
+ 		model.addAttribute("unCatCategories", uncatUI);
  		
 
  		List<Categories> categories = categoriesService.getAllCategories();
+ 		List<Categories> catUI = new ArrayList<>();
  		for (Categories cat : categories){
+ 			catUI.add(cat);
  			//cat.setParent(cat.getParent()+" : "+categoriesService.getPath(cat.getCategory(),"X"));
  			//cat.setCategory(categoriesService.getAllChildren(cat.getCategory()).size()+" - "+cat.getCategory());
  		}
- 		model.addAttribute("categories", categories);
+ 		for (Categories cat : catUI){
+ 			cat.setParent(cat.getParent()+" : "+categoriesService.getPathUI(cat.getCategory(),"X"));
+ 			cat.setCategory(categoriesService.getAllChildren(cat.getCategory()).size()+" - "+cat.getCategory());
+ 		}
+ 		//model.addAttribute("categories", categories);
+ 		model.addAttribute("categories", catUI);
  		
  	}
 
