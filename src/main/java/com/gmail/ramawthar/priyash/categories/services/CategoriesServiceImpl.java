@@ -71,11 +71,11 @@ public class CategoriesServiceImpl implements CategoriesService {
 	}
 	@Override
 	public String getPath(String category, String tranType){
-		//System.out.println("getPath 1");
+		System.out.println("getPath 1");
 		if ((category == null)||(tranType == null)){
 			return "Both parameters are required!";
 		}
-		//System.out.println("getPath 2");
+		System.out.println("getPath 2 - "+category);
 		Categories cat = repository.findBycategory(category);
 		if (cat == null){
 			Categories categories = new Categories(); 
@@ -93,13 +93,13 @@ public class CategoriesServiceImpl implements CategoriesService {
 		
 		String parentLoop = cat.parent;
 		String path = parentLoop+"/"+cat.category;
-		//System.out.println("getPath 3a "+ parentLoop + " " + path);
+		System.out.println("getPath 3a "+ parentLoop + " " + path);
 		while (!(parentLoop.equalsIgnoreCase("none"))){
 			Categories catLoop = repository.findBycategory(parentLoop);
 			path = catLoop.parent+"/"+path;
 			parentLoop = catLoop.parent;
 		}
-		//System.out.println("getPath 4");
+		System.out.println("getPath 4");
 		
 		return path;
 	}
