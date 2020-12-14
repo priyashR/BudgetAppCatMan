@@ -97,18 +97,21 @@ public class UIController {
 
  		List<Categories> categories = categoriesService.getAllCategories();
  		List<Categories> catUI = new ArrayList<>();
+ 		boolean catCheck = false;
  		for (Categories cat : categories){
  			catUI.add(cat);
+ 			catCheck =true;
  			//cat.setParent(cat.getParent()+" : "+categoriesService.getPath(cat.getCategory(),"X"));
  			//cat.setCategory(categoriesService.getAllChildren(cat.getCategory()).size()+" - "+cat.getCategory());
  		}
- 		for (Categories cat : catUI){
- 			cat.setParent(cat.getParent()+" : "+categoriesService.getPathUI(cat.getCategory(),"X"));
- 			cat.setCategory(categoriesService.getAllChildren(cat.getCategory()).size()+" - "+cat.getCategory());
+ 		if (!(catCheck)) {
+	 		for (Categories cat : catUI){
+	 			cat.setParent(cat.getParent()+" : "+categoriesService.getPathUI(cat.getCategory(),"X"));
+	 			cat.setCategory(categoriesService.getAllChildren(cat.getCategory()).size()+" - "+cat.getCategory());
+	 		}
+	 		//model.addAttribute("categories", categories);
+	 		model.addAttribute("categories", catUI);
  		}
- 		//model.addAttribute("categories", categories);
- 		model.addAttribute("categories", catUI);
- 		
  	}
 
 }

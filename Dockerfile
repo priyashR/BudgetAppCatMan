@@ -11,6 +11,6 @@ RUN mvn -f /usr/src/pom.xml package
 # build the neat container with just what we want
 FROM openjdk:8-alpine
 COPY --from=builder /usr/src/target/categories-0.0.1-SNAPSHOT.jar /usr/src/budgetApp/categories.jar
-EXPOSE 9875
+EXPOSE 9006
 WORKDIR /usr/src/budgetApp
 CMD ["java", "-jar", "categories.jar"]
