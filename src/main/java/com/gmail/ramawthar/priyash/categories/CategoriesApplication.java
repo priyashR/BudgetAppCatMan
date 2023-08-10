@@ -19,7 +19,7 @@ public class CategoriesApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CategoriesApplication.class, args);
 		
-	}
+	}//test
    @Bean
    public Docket productApi() {
       return new Docket(DocumentationType.SWAGGER_2).select()
