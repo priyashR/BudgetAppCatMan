@@ -2,7 +2,8 @@ package com.gmail.ramawthar.priyash.categories.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
+//import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ import com.gmail.ramawthar.priyash.categories.dao.CategoriesRepository;
 import com.gmail.ramawthar.priyash.categories.model.Categories;
 import com.gmail.ramawthar.priyash.categories.services.CategoriesService;
 
-import org.bson.types.ObjectId;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,12 +41,14 @@ public class CategoriesController {
 
 	  @RequestMapping(value = "/newCategory", method = RequestMethod.POST)
 	  public ResponseEntity<Object> createCategory(@Valid @RequestBody Categories categories) {
+	  //public ResponseEntity<Object> createCategory(@RequestBody Categories categories) {
+		  
 			logger.info("Controller call to createCategory");
-			categories.parent = categories.parent;
-			categories.category = categories.category;
+			categories.setParent(categories.getParent());
+			categories.setCategory(categories.getCategory());
 	    return ResponseEntity.created(categoriesService.createCategory(categories)).build();
 	  }
-	  
+/*/////PR010524 - testing		  
 	  @RequestMapping(value = "/removeCategory/{id}", method = RequestMethod.DELETE)
 	  public void deleteCategory(@PathVariable("id") ObjectId id) {
 			logger.info("Controller call to deleteCategory");
@@ -81,16 +84,19 @@ public class CategoriesController {
 	  } 
 	  
 	  @RequestMapping(value = "/allocateParent", method = RequestMethod.PUT)
-	  public ResponseEntity<Object> allocateParent(@Valid @RequestBody Categories categories) {
+	  //public ResponseEntity<Object> allocateParent(@Valid @RequestBody Categories categories) {
+	  public ResponseEntity<Object> allocateParent(@RequestBody Categories categories) {
 			logger.info("Controller call to allocate a parent to an uncategorised category");
 	    return new ResponseEntity<>(categoriesService.allocateParent(categories), HttpStatus.OK);
 	  } 
 	  
 	  @RequestMapping(value = "/fetchPath", method = RequestMethod.POST)
-	  public ResponseEntity<Object> fetchPath(@Valid @RequestBody FetchPathInput input) {
+	  //public ResponseEntity<Object> fetchPath(@Valid @RequestBody FetchPathInput input) {
+	  public ResponseEntity<Object> fetchPath(@RequestBody FetchPathInput input) {
 			logger.info("Controller call to fetchPath");
 	    return new ResponseEntity<>(categoriesService.getPath(input.getCategory(), input.getTranType()), HttpStatus.OK);
 	  }
+	/////PR010524 - testing	*/
 /*
 	  @RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	  public Pets getPetById(@PathVariable("id") ObjectId id) {

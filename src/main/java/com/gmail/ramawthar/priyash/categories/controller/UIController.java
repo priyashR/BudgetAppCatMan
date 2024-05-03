@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.Valid;
+//import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,7 +36,7 @@ public class UIController {
 	  	public String handleFileUpload(@RequestParam("file") MultipartFile file,
 				RedirectAttributes redirectAttributes,
 				Model model) {
-		  System.out.println(categoriesService.processCSVFile(file,"N"));
+/////PR010524 - testing		  System.out.println(categoriesService.processCSVFile(file,"N"));
 		  redirectAttributes.addFlashAttribute("message",
 					"You successfully uploaded " + file.getOriginalFilename() + "!");
 			//logger.info("Controller call to fetchPath");
@@ -49,7 +50,7 @@ public class UIController {
 				RedirectAttributes redirectAttributes,
 				Model model) {
  		  System.out.println("DELETING ALL CATERGORIES HERE!!!!");
-		  System.out.println(categoriesService.processCSVFile(file,"Y"));
+ 		/////PR010524 - testing			  System.out.println(categoriesService.processCSVFile(file,"Y"));
 		  redirectAttributes.addFlashAttribute("message",
 					"You successfully uploaded " + file.getOriginalFilename() + "!");
 			//logger.info("Controller call to fetchPath");
@@ -68,7 +69,7 @@ public class UIController {
 		  categories.setCategory(category);
 		  categories.setDescription(description);
 		  categories.setParent(parent);
-		  categoriesService.allocateParent(categories);
+		/////PR010524 - testing			  categoriesService.allocateParent(categories);
 		  redirectAttributes.addFlashAttribute("done!");
 			//logger.info("Controller call to fetchPath");
 	 		setUpDate(model);
@@ -81,15 +82,15 @@ public class UIController {
  	    return "maintenance";
  	}
  	private void setUpDate(Model model){
- 		List<Categories> uncat = categoriesService.getAllUncategorised();
+ 	/////PR010524 - testing		List<Categories> uncat = categoriesService.getAllUncategorised();
  		List<Categories> uncatUI = new ArrayList<>();
  		;
- 		for (Categories cat : uncat){
- 			uncatUI.add(cat);
+ 	/////PR010524 - testing			for (Categories cat : uncat){
+ 	/////PR010524 - testing			uncatUI.add(cat);
  			//cat.setParent(cat.getParent()+" : "+categoriesService.getPath(cat.getCategory(),"X"));
- 		}
+ 		/////PR010524 - testing		}
  		for (Categories cat : uncatUI){
- 			cat.setParent(cat.getParent()+" : "+categoriesService.getPathUI(cat.getCategory(),"X"));
+ 		/////PR010524 - testing	 			cat.setParent(cat.getParent()+" : "+categoriesService.getPathUI(cat.getCategory(),"X"));
  		}
  		//model.addAttribute("unCatCategories", uncat);
  		model.addAttribute("unCatCategories", uncatUI);
@@ -106,8 +107,8 @@ public class UIController {
  		}
  		if (!(catCheck)) {
 	 		for (Categories cat : catUI){
-	 			cat.setParent(cat.getParent()+" : "+categoriesService.getPathUI(cat.getCategory(),"X"));
-	 			cat.setCategory(categoriesService.getAllChildren(cat.getCategory()).size()+" - "+cat.getCategory());
+	 		/////PR010524 - testing		 			cat.setParent(cat.getParent()+" : "+categoriesService.getPathUI(cat.getCategory(),"X"));
+	 		/////PR010524 - testing	 			cat.setCategory(categoriesService.getAllChildren(cat.getCategory()).size()+" - "+cat.getCategory());
 	 		}
 	 		//model.addAttribute("categories", categories);
 	 		model.addAttribute("categories", catUI);

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import org.bson.types.ObjectId;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,12 +31,12 @@ public class CategoriesServiceImpl implements CategoriesService {
 
 	@Override
 	public URI createCategory(Categories categories){
-		categories.set_id(ObjectId.get());
+		//categories.set_id(ObjectId.get());
 		Categories newCategory = repository.save(categories);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newCategory.get_id()).toUri();
 	    return location;
 	}
-	
+	/*
 	@Override
 	public void removeCategory(ObjectId id){
 		repository.delete(repository.findBy_id(id));
@@ -201,5 +201,5 @@ public class CategoriesServiceImpl implements CategoriesService {
     	}
     	
     	return status;
-    }
+    }*/
 }
