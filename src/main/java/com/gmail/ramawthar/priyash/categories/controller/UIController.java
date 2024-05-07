@@ -32,11 +32,10 @@ public class UIController {
 	CategoriesService categoriesService;
 	
  	  @RequestMapping(value = "/processCSVFile", method = RequestMethod.POST)
-	  //public ResponseEntity<Object> processFile(@Valid @RequestBody String input) {
-	  	public String handleFileUpload(@RequestParam("file") MultipartFile file,
+	  	public String handleFileUpload(@Valid @RequestParam("file") MultipartFile file,
 				RedirectAttributes redirectAttributes,
 				Model model) {
-/////PR010524 - testing		  System.out.println(categoriesService.processCSVFile(file,"N"));
+ 		  System.out.println(categoriesService.processCSVFile(file,"N"));
 		  redirectAttributes.addFlashAttribute("message",
 					"You successfully uploaded " + file.getOriginalFilename() + "!");
 			//logger.info("Controller call to fetchPath");
@@ -46,11 +45,11 @@ public class UIController {
  	  
  	  @RequestMapping(value = "/refreshAndProcessCSVFile", method = RequestMethod.POST)
 	  //public ResponseEntity<Object> processFile(@Valid @RequestBody String input) {
-	  	public String refreshAndHandleFileUpload(@RequestParam("file") MultipartFile file,
+	  	public String refreshAndHandleFileUpload(@Valid @RequestParam("file") MultipartFile file,
 				RedirectAttributes redirectAttributes,
 				Model model) {
  		  System.out.println("DELETING ALL CATERGORIES HERE!!!!");
- 		/////PR010524 - testing			  System.out.println(categoriesService.processCSVFile(file,"Y"));
+ 		  System.out.println(categoriesService.processCSVFile(file,"Y"));
 		  redirectAttributes.addFlashAttribute("message",
 					"You successfully uploaded " + file.getOriginalFilename() + "!");
 			//logger.info("Controller call to fetchPath");
@@ -69,7 +68,7 @@ public class UIController {
 		  categories.setCategory(category);
 		  categories.setDescription(description);
 		  categories.setParent(parent);
-		/////PR010524 - testing			  categoriesService.allocateParent(categories);
+		  categoriesService.allocateParent(categories);
 		  redirectAttributes.addFlashAttribute("done!");
 			//logger.info("Controller call to fetchPath");
 	 		setUpDate(model);
@@ -82,15 +81,15 @@ public class UIController {
  	    return "maintenance";
  	}
  	private void setUpDate(Model model){
- 	/////PR010524 - testing		List<Categories> uncat = categoriesService.getAllUncategorised();
+ 	    List<Categories> uncat = categoriesService.getAllUncategorised();
  		List<Categories> uncatUI = new ArrayList<>();
  		;
- 	/////PR010524 - testing			for (Categories cat : uncat){
- 	/////PR010524 - testing			uncatUI.add(cat);
+ 		for (Categories cat : uncat){
+ 			uncatUI.add(cat);
  			//cat.setParent(cat.getParent()+" : "+categoriesService.getPath(cat.getCategory(),"X"));
- 		/////PR010524 - testing		}
+ 		}
  		for (Categories cat : uncatUI){
- 		/////PR010524 - testing	 			cat.setParent(cat.getParent()+" : "+categoriesService.getPathUI(cat.getCategory(),"X"));
+ 			cat.setParent(cat.getParent()+" : "+categoriesService.getPathUI(cat.getCategory(),"X"));
  		}
  		//model.addAttribute("unCatCategories", uncat);
  		model.addAttribute("unCatCategories", uncatUI);
@@ -107,8 +106,8 @@ public class UIController {
  		}
  		if (!(catCheck)) {
 	 		for (Categories cat : catUI){
-	 		/////PR010524 - testing		 			cat.setParent(cat.getParent()+" : "+categoriesService.getPathUI(cat.getCategory(),"X"));
-	 		/////PR010524 - testing	 			cat.setCategory(categoriesService.getAllChildren(cat.getCategory()).size()+" - "+cat.getCategory());
+	 			cat.setParent(cat.getParent()+" : "+categoriesService.getPathUI(cat.getCategory(),"X"));
+	 			cat.setCategory(categoriesService.getAllChildren(cat.getCategory()).size()+" - "+cat.getCategory());
 	 		}
 	 		//model.addAttribute("categories", categories);
 	 		model.addAttribute("categories", catUI);

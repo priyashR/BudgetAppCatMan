@@ -48,12 +48,12 @@ public class CategoriesController {
 			categories.setCategory(categories.getCategory());
 	    return ResponseEntity.created(categoriesService.createCategory(categories)).build();
 	  }
-/*/////PR010524 - testing		  
+	/*	  
 	  @RequestMapping(value = "/removeCategory/{id}", method = RequestMethod.DELETE)
 	  public void deleteCategory(@PathVariable("id") ObjectId id) {
 			logger.info("Controller call to deleteCategory");
 		  categoriesService.removeCategory(id);;
-	  }
+	  }*/
 	  
 	  @RequestMapping(value = "/category/{category}", method = RequestMethod.GET)
 	  public ResponseEntity<Object> getCategory(@PathVariable("category") String category) {
@@ -96,7 +96,6 @@ public class CategoriesController {
 			logger.info("Controller call to fetchPath");
 	    return new ResponseEntity<>(categoriesService.getPath(input.getCategory(), input.getTranType()), HttpStatus.OK);
 	  }
-	/////PR010524 - testing	*/
 /*
 	  @RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	  public Pets getPetById(@PathVariable("id") ObjectId id) {

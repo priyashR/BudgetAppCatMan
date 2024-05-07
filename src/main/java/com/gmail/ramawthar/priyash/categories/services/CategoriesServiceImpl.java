@@ -36,12 +36,12 @@ public class CategoriesServiceImpl implements CategoriesService {
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newCategory.get_id()).toUri();
 	    return location;
 	}
-	/*
+	
 	@Override
-	public void removeCategory(ObjectId id){
+	public void removeCategory(Long id){
 		repository.delete(repository.findBy_id(id));
 	}
-
+	
 	@Override
 	public Categories getCategory(String category){
 		return repository.findBycategory(category);
@@ -54,7 +54,7 @@ public class CategoriesServiceImpl implements CategoriesService {
 	@Override
 	public List<Categories> getAllSiblings(String category){
 		Categories categories = repository.findBycategory(category);
-		return repository.findByparent(categories.parent);
+		return repository.findByparent(categories.getParent());
 	}
 	
 	@Override
@@ -85,19 +85,19 @@ public class CategoriesServiceImpl implements CategoriesService {
 			if (tranType.equalsIgnoreCase("I"))
 				parent = "incomeUNCAT";
 			categories.setParent(parent);
-			categories.set_id(ObjectId.get());
+			//categories.set_id(ObjectId.get());
 			Categories newCategory = repository.save(categories);
 			cat = newCategory;
 		}
 		//System.out.println("getPath 3");
 		
-		String parentLoop = cat.parent;
-		String path = parentLoop+"/"+cat.category;
+		String parentLoop = cat.getParent();
+		String path = parentLoop+"/"+cat.getCategory();
 		System.out.println("getPath 3a "+ parentLoop + " " + path);
 		while (!(parentLoop.equalsIgnoreCase("none"))){
 			Categories catLoop = repository.findBycategory(parentLoop);
-			path = catLoop.parent+"/"+path;
-			parentLoop = catLoop.parent;
+			path = catLoop.getParent()+"/"+path;
+			parentLoop = catLoop.getParent();
 		}
 		System.out.println("getPath 4");
 		
@@ -120,19 +120,19 @@ public class CategoriesServiceImpl implements CategoriesService {
 			if (tranType.equalsIgnoreCase("I"))
 				parent = "incomeUNCAT";
 			categories.setParent(parent);
-			categories.set_id(ObjectId.get());
+			//categories.set_id(ObjectId.get());
 			Categories newCategory = categories;
 			cat = newCategory;
 		}
 		//System.out.println("getPath 3");
 		
-		String parentLoop = cat.parent;
-		String path = parentLoop+"/"+cat.category;
+		String parentLoop = cat.getParent();
+		String path = parentLoop+"/"+cat.getCategory();
 		System.out.println("getPath 3a "+ parentLoop + " " + path);
 		while (!(parentLoop.equalsIgnoreCase("none"))){
 			Categories catLoop = repository.findBycategory(parentLoop);
-			path = catLoop.parent+"/"+path;
-			parentLoop = catLoop.parent;
+			path = catLoop.getParent()+"/"+path;
+			parentLoop = catLoop.getParent();
 		}
 		System.out.println("getPath 4");
 		
@@ -141,17 +141,17 @@ public class CategoriesServiceImpl implements CategoriesService {
 
 	@Override
 	public String allocateParent(Categories categories){
-		Categories cat = repository.findBycategory(categories.category);
+		Categories cat = repository.findBycategory(categories.getCategory());
 		if (cat == null){
 			return "Category not found - no records updated";
 		}
-		if (!((cat.parent.equals("expenseUNCAT"))||(cat.parent.equals("incomeUNCAT")))){
+		if (!((cat.getParent().equals("expenseUNCAT"))||(cat.getParent().equals("incomeUNCAT")))){
 			return "Cannot update this parent, must be uncategorised - no records updated";
 		}
-		if(repository.findBycategory(categories.parent) == null){
+		if(repository.findBycategory(categories.getParent()) == null){
 			return "Parent category not found - no records updated";
 		}
-		cat.parent = categories.parent;
+		cat.setParent(categories.getParent());
 		repository.save(cat);
 		return "Success!";
 	}
@@ -165,7 +165,7 @@ public class CategoriesServiceImpl implements CategoriesService {
     			System.out.println("Delete all records here");
     			List<Categories> allCat = getAllCategories();
     			for (Categories cat : allCat){
-    				removeCategory(new ObjectId(cat.get_id()));
+    				removeCategory(cat.get_id());
     			}
     		}
 	    	BufferedReader br;
@@ -201,5 +201,5 @@ public class CategoriesServiceImpl implements CategoriesService {
     	}
     	
     	return status;
-    }*/
+    }
 }
