@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment # Kubernetes resource kind we are creating
+metadata:
+  name: category-maintenance
+spec:
+  selector:
+    matchLabels:
+      app: category-maintenance
+  replicas: 2 # Number of replicas that will be created for this deployment
+  template:
+    metadata:
+      name: category-maintenance
+      namespace: budget-app
+      labels:
+         app: category-maintenance
+    spec:
+      containers:
+        - name: category-maintenance
+          image: priyash/categories:v0.03
+# Image that will be used to containers in the cluster
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9006
+          env:
+          - name: POSTGRES_URL
+            value: "jdbc:postgresql://192.168.0.186:5432/"
+          - name: POSTGRES_PWD
+            value: "postgres"
+      imagePullSecrets:
+        - name: my-reg-secret
+
+# The port that the container is running on in the cluster
